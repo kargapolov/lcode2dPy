@@ -1,21 +1,24 @@
+import numpy as np
+from lcode2dPy.config.default_config import default_config
+
+# Imports for 2d simulation
 from lcode2dPy.push_solver import PusherAndSolver
 from lcode2dPy.beam.beam_slice import BeamSlice
 from lcode2dPy.beam.beam_io import MemoryBeamSource, MemoryBeamDrain
-#from lcode2dPy.push_solver_3d import PushAndSolver3d
-import numpy as np
-from lcode2dPy.config.default_config import default_config
-from lcode2dPy.beam.beam_generator import make_beam, Gauss, rGauss
+from lcode2dPy.beam_generator.beam_generator import make_beam, Gauss, rGauss
 from lcode2dPy.plasma.initialization import init_plasma
 
 class Simulation:
     def __init__(self, config=default_config, beam_generator=make_beam, beam_pars=None, diagnostics=None):
         self.config = config
-        if config.get('geometry') == '3d':
+
+        geometry = config.get('geometry')
+        if  geometry == '3d' or geometry == '3D':
             pass
-#            self.push_solver = PushAndSolver3d(self.config) # 3d
-        elif config.get('geometry') == 'circ' or config.get('geometry') == 'c':
+            # self.push_solver = PushAndSolver3d(self.config) # 3d
+        elif geometry == 'circ' or geometry == 'c':
             self.push_solver = PusherAndSolver(self.config) # circ
-        elif config.get('geometry') == 'plane':
+        elif geometry == 'plane':
             self.push_solver = PusherAndSolver(self.config) # 2d_plane
 
         self.beam_generator = beam_generator
