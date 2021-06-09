@@ -33,13 +33,13 @@ class PushAndSolver3d:
                 pl_particles, pl_fields, pl_currents, pl_const_arrays, beam_ro)
             time2 = time.time()
 
-            print(f"Plasma solver done in {time2-time1:+.4f} s.", end='\t')
+            # print(f"Plasma solver done in {time2-time1:+.4f} s.", end='\t')
 
             time1 = time.time()
             beam_calculator.move_beam(pl_fields, prev_pl_fields)
             time2 = time.time()
 
-            print(f"Beam pusher done in {time2-time1:+.4f} s.")
+            # print(f"Beam pusher done in {time2-time1:+.4f} s.")
 
             Ez_00 = pl_fields.E_z[self.grid_steps//2, self.grid_steps//2]
 
